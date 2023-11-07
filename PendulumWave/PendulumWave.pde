@@ -7,19 +7,21 @@ PVector gravity = new PVector(0.0, 2) ;
 
 void setup() {
   size(800, 800) ;
-  frameRate(30) ;
-  
-  float initLength = 1500000 ;
-  
+  //frameRate(30) ;
+
+  final int CLOSENESS = 100 ; //not sure what the value actually represents
+  final int MAX_LEN = 550 ;
+   
   //the lengths must be proportional to 1/i^2
-  //just tweak initLength and the addition for j, to get it looking right.
+
   for(int i = 1 ; i < 13 ; i++) {
-    float j = i + 50 ;
-    float length = initLength / (j * j) ;
+    float j = i + CLOSENESS ;
+    float length = MAX_LEN * pow(CLOSENESS, 2) / pow(j, 2) ;
+    
+    println(i + ": " + length) ;
     
     Pendulum pend = new Pendulum(length, new PVector(400, 0)) ;
-    //length = length * 1.41 ;
-    //length = (i+1) * 30 ;
+
     pend.rotate(PI / -6) ;
     pendulums.add(pend) ;
   }
