@@ -3,24 +3,22 @@
 import java.util.ArrayList ;
 
 ArrayList<Pendulum> pendulums = new ArrayList<Pendulum>();
-PVector gravity = new PVector(0.0, 2) ;
+PVector gravity = new PVector(0.0, 1) ;
 
 void setup() {
   size(800, 800) ;
   //frameRate(30) ;
 
-  final int CLOSENESS = 100 ; //not sure what the value actually represents
-  final int MAX_LEN = 550 ;
-   
+  final int CLOSENESS = 70 ; //not sure what the value actually represents
+  final int MAX_LEN = 750 ;
+  final int NUM_PENDULUMS = 12 ;
+  
   //the lengths must be proportional to 1/i^2
 
-  for(int i = 1 ; i < 13 ; i++) {
-    float j = i + CLOSENESS ;
-    float length = MAX_LEN * pow(CLOSENESS, 2) / pow(j, 2) ;
+  for(int i = 0 ; i < NUM_PENDULUMS ; i++) {
+    float length = MAX_LEN * pow(CLOSENESS, 2) / pow(i + CLOSENESS, 2) ;
     
-    println(i + ": " + length) ;
-    
-    Pendulum pend = new Pendulum(length, new PVector(400, 0)) ;
+    Pendulum pend = new Pendulum(length, new PVector(width/2, 0)) ;
 
     pend.rotate(PI / -6) ;
     pendulums.add(pend) ;
@@ -49,7 +47,7 @@ void draw() {
         fill(255, 255, 0) ;
         break ;
       default :
-        fill(100, 100, 0) ;
+        fill(0, 0, 0) ;
     }
     circle(pend.ptOrigin.x + pend.x, pend.ptOrigin.y + pend.y, 20);
     pend.advance(gravity) ; 
